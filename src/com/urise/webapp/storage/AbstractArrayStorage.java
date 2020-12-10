@@ -10,4 +10,6 @@ public abstract class AbstractArrayStorage implements Storage{
     public int size() {
         return size;
     }
+
+    protected abstract int getIndex(String uuid);
 }
