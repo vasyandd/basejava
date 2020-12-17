@@ -1,6 +1,7 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.NotExistStorageException;
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
@@ -60,5 +61,11 @@ public abstract class AbstractArrayStorageTest {
         Resume[] resumes = storage.getAll();
         Assert.assertEquals(resumes.length, storage.size());
         Assert.assertEquals(resumes[1], storage.get("uuid2"));
+    }
+    @Test (expected = StorageException.class)
+    public void saveOverflow(){
+        for(int i = 4; i <= 10000; i++)
+            storage.save(new Resume());
+        storage.save(new Resume());
     }
 }
