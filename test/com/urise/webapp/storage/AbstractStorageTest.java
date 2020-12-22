@@ -1,11 +1,12 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.NotExistStorageException;
-import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 public abstract class AbstractStorageTest {
     Storage storage;
@@ -13,14 +14,12 @@ public abstract class AbstractStorageTest {
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
 
-
-
     @Before
     public void setUp() {
         storage.clear();
-        storage.save(new Resume(UUID_1));
-        storage.save(new Resume(UUID_2));
-        storage.save(new Resume(UUID_3));
+        storage.save(new Resume(UUID_1, "Name3"));
+        storage.save(new Resume(UUID_2, "Name2"));
+        storage.save(new Resume(UUID_3, "Name1"));
     }
     @Test
     public void size() {
@@ -39,13 +38,13 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void save() {
-        storage.save(new Resume("fdsfsdf"));
+        storage.save(new Resume("fdsfsdf", "gg"));
         Assert.assertEquals(4, storage.size());
     }
 
     @Test
     public void get() {
-        Resume resume = new Resume("uuid1");
+        Resume resume = new Resume("uuid1", "Name3");
         Assert.assertEquals(resume, storage.get("uuid1"));
     }
 
@@ -57,15 +56,10 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAll() {
-        Resume[] resumes = storage.getAll();
-        Assert.assertEquals(resumes.length, storage.size());
-        Assert.assertEquals(resumes[1], storage.get("uuid2"));
+    public void getAllSorted() {
+        List<Resume> resumes = storage.getAllSorted();
+        Assert.assertEquals(resumes.size(), storage.size());
+        Assert.assertEquals(resumes.get(0), storage.get("uuid3"));
     }
-    @Test (expected = StorageException.class)
-    public void saveOverflow(){
-        for(int i = 4; i <= 10000; i++)
-            storage.save(new Resume());
-        storage.save(new Resume());
-    }
+
 }
