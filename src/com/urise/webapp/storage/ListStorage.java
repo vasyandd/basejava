@@ -5,7 +5,7 @@ import com.urise.webapp.model.Resume;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage<Integer> {
     private List<Resume> resumes = new ArrayList<>();
 
     @Override
@@ -24,23 +24,23 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r, Object searchKey) {
+    protected void doSave(Resume r, Integer searchKey) {
         resumes.add(r);
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
-        resumes.set((Integer) searchKey, r);
+    protected void doUpdate(Resume r, Integer searchKey) {
+        resumes.set(searchKey, r);
     }
 
     @Override
-    protected boolean isExist(Object index) {
+    protected boolean isExist(Integer index) {
         return index != null;
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
-            resumes.remove(((Integer) searchKey).intValue());
+    protected void doDelete(Integer searchKey) {
+            resumes.remove((searchKey).intValue());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume doGet(Object index) {
-        return resumes.get((Integer) index);
+    protected Resume doGet(Integer index) {
+        return resumes.get(index);
     }
 }
