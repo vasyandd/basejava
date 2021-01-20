@@ -1,11 +1,12 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.NotExistStorageException;
-import com.urise.webapp.model.Resume;
+import com.urise.webapp.model.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Month;
 import java.util.List;
 
 public abstract class AbstractStorageTest {
@@ -13,13 +14,28 @@ public abstract class AbstractStorageTest {
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
-
+    private static final Resume R1;
+    private static final Resume R2;
+    private static final Resume R3;
+    static {
+        R1 = new Resume(UUID_1, "Name3");
+        R2 = new Resume(UUID_2, "Name2");
+        R3 = new Resume(UUID_3, "Name1");
+        R1.addContact(ContactType.SKYPE, "Vacbkaaaa");
+        R1.addContact(ContactType.MAIL, "Kiriluk_v_r@mail.ru");
+        R1.addSection(SectionType.ACHIEVEMENT, new TextSection("Лушчий из лучших"));
+        R1.addSection(SectionType.EDUCATION, new ListSection("429 school, BGTU VOENMEH"));
+        R1.addSection(SectionType.QUALIFICATION, new TextSection("JAVA"));
+        R1.addSection(SectionType.OBJECTIVE, new TextSection("engineer"));
+        R1.addSection(SectionType.PERSONAL, new ListSection("Замечательный", "Красивый", "GENIUS"));
+        R1.addSection(SectionType.EXPERIENCE, new OrganizationSection(new Organization("455VP", "url", new Organization.Position(2019, Month.MARCH, "voenpred", "voenpred"))));
+    }
     @Before
     public void setUp() {
         storage.clear();
-        storage.save(new Resume(UUID_1, "Name3"));
-        storage.save(new Resume(UUID_2, "Name2"));
-        storage.save(new Resume(UUID_3, "Name1"));
+        storage.save(R1);
+        storage.save(R2);
+        storage.save(R3);
     }
     @Test
     public void size() {
@@ -31,6 +47,8 @@ public abstract class AbstractStorageTest {
         storage.clear();
         Assert.assertEquals(0, storage.size());
     }
+
+
 
     @Test
     public void update() {
