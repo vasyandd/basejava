@@ -6,11 +6,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.time.Month;
 import java.util.List;
 
 public abstract class AbstractStorageTest {
     Storage storage;
+    protected final static File STORAGE_DIR = new File("D:\\progi\\топджава\\basej\\project\\basejava\\storage");
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";

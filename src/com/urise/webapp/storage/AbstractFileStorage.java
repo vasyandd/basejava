@@ -16,8 +16,8 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         if (!directory.canRead() || !directory.canWrite()) throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
         this.directory = directory;
     }
-    protected abstract void doWrite(Resume r, OutputStream file) throws IOException;
-    protected abstract Resume doRead(InputStream file) throws IOException;
+    protected abstract void doWrite(Resume r, OutputStream out) throws IOException;
+    protected abstract Resume doRead(InputStream in) throws IOException;
     @Override
     protected void doSave(Resume r, File file) {
         try {
@@ -77,9 +77,10 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     public void clear() {
         File[] files = directory.listFiles();
-        if (files != null)
-        for (File file : files)
-            doDelete(file);
+        if (files != null) {
+           for (File file : files)
+              doDelete(file);
+       }
     }
 
     @Override
