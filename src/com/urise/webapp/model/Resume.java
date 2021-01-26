@@ -9,6 +9,7 @@ import java.util.*;
 public class Resume implements Comparable<Resume>, Serializable {
 
     // Unique identifier
+    private static final long serialVersionUID = 1L;
     private final String uuid;
     private final String fullName;
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
