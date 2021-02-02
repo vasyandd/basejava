@@ -34,7 +34,7 @@ public abstract class AbstractStorageTest {
     }
     @Before
     public void setUp() {
-        storage.clear();
+        clear();
         storage.save(R1);
         storage.save(R2);
         storage.save(R3);
@@ -44,7 +44,7 @@ public abstract class AbstractStorageTest {
         Assert.assertEquals(3, storage.size());
     }
 
-    @Test
+   // @Test
     public void clear() {
         storage.clear();
         Assert.assertEquals(0, storage.size());
@@ -67,8 +67,16 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void get() {
-        Resume resume = new Resume("uuid2", "Name2");
-        Assert.assertEquals(resume, storage.get("uuid2"));
+        Resume resume = new Resume("uuid1", "Name3");
+        resume.addContact(ContactType.SKYPE, "Vacbkaaaa");
+        resume.addContact(ContactType.MAIL, "Kiriluk_v_r@mail.ru");
+        resume.addSection(SectionType.ACHIEVEMENT, new TextSection("Лушчий из лучших"));
+        resume.addSection(SectionType.EDUCATION, new ListSection("429 school, BGTU VOENMEH"));
+        resume.addSection(SectionType.QUALIFICATION, new TextSection("JAVA"));
+        resume.addSection(SectionType.OBJECTIVE, new TextSection("engineer"));
+        resume.addSection(SectionType.PERSONAL, new ListSection("Замечательный", "Красивый", "GENIUS"));
+        resume.addSection(SectionType.EXPERIENCE, new OrganizationSection(new Organization("455VP", "url", new Organization.Position(2019, Month.MARCH, "voenpred", "voenpred"))));
+        Assert.assertEquals(resume, storage.get("uuid1"));
     }
 
     @Test(expected = NotExistStorageException.class)
