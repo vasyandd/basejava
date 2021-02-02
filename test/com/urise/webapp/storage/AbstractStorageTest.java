@@ -25,11 +25,12 @@ public abstract class AbstractStorageTest {
         R3 = new Resume(UUID_3, "Name1");
         R1.addContact(ContactType.SKYPE, "Vacbkaaaa");
         R1.addContact(ContactType.MAIL, "Kiriluk_v_r@mail.ru");
-        R1.addSection(SectionType.ACHIEVEMENT, new TextSection("Лушчий из лучших"));
-        R1.addSection(SectionType.EDUCATION, new ListSection("429 school, BGTU VOENMEH"));
-        R1.addSection(SectionType.QUALIFICATION, new TextSection("JAVA"));
+        R1.addSection(SectionType.ACHIEVEMENT, new ListSection("красивый", "умный"));
+        R1.addSection(SectionType.EDUCATION, new OrganizationSection(new Organization("429 school", "url", new Organization.Position(2002, Month.SEPTEMBER, 2013, Month.MAY, "shkolnik", "uchenik"))
+               ,new Organization("BGTU VOENMEH", "url", new Organization.Position(2013, Month.SEPTEMBER, 2019, Month.FEBRUARY, "student", "uchenik"))));
+        R1.addSection(SectionType.QUALIFICATION, new ListSection("JAVA", "Spring"));
         R1.addSection(SectionType.OBJECTIVE, new TextSection("engineer"));
-        R1.addSection(SectionType.PERSONAL, new ListSection("Замечательный", "Красивый", "GENIUS"));
+        R1.addSection(SectionType.PERSONAL, new TextSection("best of the best"));
         R1.addSection(SectionType.EXPERIENCE, new OrganizationSection(new Organization("455VP", "url", new Organization.Position(2019, Month.MARCH, "voenpred", "voenpred"))));
     }
     @Before
@@ -70,11 +71,12 @@ public abstract class AbstractStorageTest {
         Resume resume = new Resume("uuid1", "Name3");
         resume.addContact(ContactType.SKYPE, "Vacbkaaaa");
         resume.addContact(ContactType.MAIL, "Kiriluk_v_r@mail.ru");
-        resume.addSection(SectionType.ACHIEVEMENT, new TextSection("Лушчий из лучших"));
-        resume.addSection(SectionType.EDUCATION, new ListSection("429 school, BGTU VOENMEH"));
-        resume.addSection(SectionType.QUALIFICATION, new TextSection("JAVA"));
+        resume.addSection(SectionType.ACHIEVEMENT, new ListSection("красивый", "умный"));
+        resume.addSection(SectionType.EDUCATION, new OrganizationSection(new Organization("429 school", "url", new Organization.Position(2002, Month.SEPTEMBER, 2013, Month.MAY, "shkolnik", "uchenik"))
+              ,new Organization("BGTU VOENMEH", "url", new Organization.Position(2013, Month.SEPTEMBER, 2019, Month.FEBRUARY, "student", "uchenik"))));
+        resume.addSection(SectionType.QUALIFICATION, new ListSection("JAVA", "Spring"));
         resume.addSection(SectionType.OBJECTIVE, new TextSection("engineer"));
-        resume.addSection(SectionType.PERSONAL, new ListSection("Замечательный", "Красивый", "GENIUS"));
+        resume.addSection(SectionType.PERSONAL, new TextSection("best of the best"));
         resume.addSection(SectionType.EXPERIENCE, new OrganizationSection(new Organization("455VP", "url", new Organization.Position(2019, Month.MARCH, "voenpred", "voenpred"))));
         Assert.assertEquals(resume, storage.get("uuid1"));
     }
