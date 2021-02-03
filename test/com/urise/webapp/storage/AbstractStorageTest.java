@@ -27,7 +27,7 @@ public abstract class AbstractStorageTest {
         R1.addContact(ContactType.MAIL, "Kiriluk_v_r@mail.ru");
         R1.addSection(SectionType.ACHIEVEMENT, new ListSection("красивый", "умный"));
         R1.addSection(SectionType.EDUCATION, new OrganizationSection(new Organization("429 school", "url", new Organization.Position(2002, Month.SEPTEMBER, 2013, Month.MAY, "shkolnik", "uchenik"))
-               ,new Organization("BGTU VOENMEH", "url", new Organization.Position(2013, Month.SEPTEMBER, 2019, Month.FEBRUARY, "student", "uchenik"))));
+              ,new Organization("BGTU VOENMEH", "url", new Organization.Position(2013, Month.SEPTEMBER, 2019, Month.FEBRUARY, "student", "uchenik"))));
         R1.addSection(SectionType.QUALIFICATION, new ListSection("JAVA", "Spring"));
         R1.addSection(SectionType.OBJECTIVE, new TextSection("engineer"));
         R1.addSection(SectionType.PERSONAL, new TextSection("best of the best"));

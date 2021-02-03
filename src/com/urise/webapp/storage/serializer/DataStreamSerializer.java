@@ -118,8 +118,8 @@ public class DataStreamSerializer implements StreamSerializer {
     }
 
     private void writeLocalDate(DataOutputStream dataOutputStream, LocalDate ld) throws IOException {
-        dataOutputStream.write(ld.getYear());
-        dataOutputStream.write(ld.getMonth().getValue());
+        dataOutputStream.writeInt(ld.getYear());
+        dataOutputStream.writeInt(ld.getMonth().getValue());
     }
 
     private LocalDate readLocalDate(DataInputStream dataInputStream) throws IOException{
